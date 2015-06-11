@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using RestSharp;
 
 namespace Rollbar {
     public class RollbarPayload {
@@ -15,11 +14,8 @@ namespace Rollbar {
             RollbarData = data;
         }
 
-        public void Send() {
-            var http = new RestClient("https://api.rollbar.com");
-            var request = new RestRequest("/api/1/item/", Method.POST);
-            request.AddParameter("application/json", JsonConvert.SerializeObject(this), ParameterType.RequestBody);
-            http.Execute(request);
+        public string ToJson() {
+            return JsonConvert.SerializeObject(this);
         }
 
         [JsonProperty("access_token", Required = Required.Always)]
