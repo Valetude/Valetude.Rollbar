@@ -7,8 +7,8 @@
     <ProjectGuid>{3A99C5E2-AE41-49CA-9CB3-2C3A70D2A8C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rollbar.Net</RootNamespace>
-    <AssemblyName>Rollbar.Net</AssemblyName>
+    <RootNamespace>Rollbar</RootNamespace>
+    <AssemblyName>Rollbar-dot-Net</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,16 +30,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArbitraryKeyConverter.cs" />
+    <Compile Include="ErrorLevel.cs" />
+    <Compile Include="ErrorLevelConverter.cs" />
+    <Compile Include="HasArbitraryKeys.cs" />
+    <Compile Include="JsonConverter`T.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RollbarBody.cs" />
+    <Compile Include="RollbarClient.cs" />
+    <Compile Include="RollbarContext.cs" />
+    <Compile Include="RollbarData.cs" />
+    <Compile Include="RollbarException.cs" />
+    <Compile Include="RollbarFrame.cs" />
+    <Compile Include="RollbarJavascriptClient.cs" />
+    <Compile Include="RollbarPayload.cs" />
+    <Compile Include="RollbarPerson.cs" />
+    <Compile Include="RollbarRequest.cs" />
+    <Compile Include="RollbarMessage.cs" />
+    <Compile Include="RollbarServer.cs" />
+    <Compile Include="RollbarTrace.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
