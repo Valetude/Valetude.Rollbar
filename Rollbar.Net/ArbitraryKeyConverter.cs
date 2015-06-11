@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace Rollbar {
     public class ArbitraryKeyConverter : JsonConverter<HasArbitraryKeys> {
         public override void WriteJson(JsonWriter writer, HasArbitraryKeys value, JsonSerializer serializer) {
-            writer.WriteValue(value.Denormalize());
+            JObject.FromObject(value.Denormalize(), serializer).WriteTo(writer);
         }
 
         public override HasArbitraryKeys ReadJson(JsonReader reader, HasArbitraryKeys existingValue, JsonSerializer serializer) {
