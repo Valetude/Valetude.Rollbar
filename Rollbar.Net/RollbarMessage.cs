@@ -15,7 +15,7 @@ namespace Rollbar {
         public string Body { get; private set; }
 
         protected override void Normalize() {
-            Body = (string) (AdditionalKeys.ContainsKey("body") ? AdditionalKeys["body"] : null);
+            Body = (string) (AdditionalKeys.ContainsKey("body") ? AdditionalKeys["body"] : Body);
             AdditionalKeys.Remove("body");
         }
 

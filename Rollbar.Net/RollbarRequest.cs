@@ -23,23 +23,23 @@ namespace Rollbar {
         public string UserIp { get; set; }
 
         protected override void Normalize() {
-            Url = (string) (AdditionalKeys.ContainsKey("url") ? AdditionalKeys["url"] : null);
+            Url = (string) (AdditionalKeys.ContainsKey("url") ? AdditionalKeys["url"] : Url);
             AdditionalKeys.Remove("url");
-            Method = (string) (AdditionalKeys.ContainsKey("method") ? AdditionalKeys["method"] : null);
+            Method = (string) (AdditionalKeys.ContainsKey("method") ? AdditionalKeys["method"] : Method);
             AdditionalKeys.Remove("method");
-            Headers = (Dictionary<string, string>) (AdditionalKeys.ContainsKey("headers") ? AdditionalKeys["headers"] : null);
+            Headers = (Dictionary<string, string>) (AdditionalKeys.ContainsKey("headers") ? AdditionalKeys["headers"] : Headers);
             AdditionalKeys.Remove("headers");
-            Params = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("params") ? AdditionalKeys["params"] : null);
+            Params = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("params") ? AdditionalKeys["params"] : Params);
             AdditionalKeys.Remove("params");
-            GetParams = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("get_params") ? AdditionalKeys["get_params"] : null);
+            GetParams = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("get_params") ? AdditionalKeys["get_params"] : GetParams);
             AdditionalKeys.Remove("get_params");
-            QueryString = (string) (AdditionalKeys.ContainsKey("query_string") ? AdditionalKeys["query_string"] : null);
+            QueryString = (string) (AdditionalKeys.ContainsKey("query_string") ? AdditionalKeys["query_string"] : QueryString);
             AdditionalKeys.Remove("query_string");
-            PostParams = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("post_params") ? AdditionalKeys["post_params"] : null);
+            PostParams = (Dictionary<string, object>) (AdditionalKeys.ContainsKey("post_params") ? AdditionalKeys["post_params"] : PostParams);
             AdditionalKeys.Remove("post_params");
-            PostBody = (string) (AdditionalKeys.ContainsKey("post_body") ? AdditionalKeys["post_body"] : null);
+            PostBody = (string) (AdditionalKeys.ContainsKey("post_body") ? AdditionalKeys["post_body"] : PostBody);
             AdditionalKeys.Remove("post_body");
-            UserIp = (string) (AdditionalKeys.ContainsKey("user_ip") ? AdditionalKeys["user_ip"] : null);
+            UserIp = (string) (AdditionalKeys.ContainsKey("user_ip") ? AdditionalKeys["user_ip"] : UserIp);
             AdditionalKeys.Remove("user_ip");
         }
 

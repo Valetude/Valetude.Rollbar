@@ -13,13 +13,13 @@ namespace Rollbar {
         public string CodeVersion { get; set; }
 
         protected override void Normalize() {
-            Host = (string) (AdditionalKeys.ContainsKey("host") ? AdditionalKeys["host"] : null);
+            Host = (string) (AdditionalKeys.ContainsKey("host") ? AdditionalKeys["host"] : Host);
             AdditionalKeys.Remove("host");
-            Root = (string) (AdditionalKeys.ContainsKey("root") ? AdditionalKeys["root"] : null);
+            Root = (string) (AdditionalKeys.ContainsKey("root") ? AdditionalKeys["root"] : Root);
             AdditionalKeys.Remove("root");
-            Branch = (string) (AdditionalKeys.ContainsKey("branch") ? AdditionalKeys["branch"] : null);
+            Branch = (string) (AdditionalKeys.ContainsKey("branch") ? AdditionalKeys["branch"] : Branch);
             AdditionalKeys.Remove("branch");
-            CodeVersion = (string) (AdditionalKeys.ContainsKey("code_version") ? AdditionalKeys["code_version"] : null);
+            CodeVersion = (string) (AdditionalKeys.ContainsKey("code_version") ? AdditionalKeys["code_version"] : CodeVersion);
             AdditionalKeys.Remove("code_version");
         }
 

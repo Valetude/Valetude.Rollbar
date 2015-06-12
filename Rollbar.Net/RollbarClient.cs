@@ -7,7 +7,7 @@ namespace Rollbar {
         public RollbarJavascriptClient Javascript { get; set; }
 
         protected override void Normalize() {
-            Javascript = (RollbarJavascriptClient) (AdditionalKeys.ContainsKey("javascript") ? AdditionalKeys["javascript"] : null);
+            Javascript = (RollbarJavascriptClient) (AdditionalKeys.ContainsKey("javascript") ? AdditionalKeys["javascript"] : Javascript);
             AdditionalKeys.Remove("javascript");
         }
 
