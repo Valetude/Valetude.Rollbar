@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Rollbar.Test {
     public class RollbarPayloadFixture {
-        private readonly int _zero = 0;
         private readonly RollbarPayload _exceptionExample;
         private readonly RollbarPayload _messageException;
         private readonly RollbarPayload _crashException;
