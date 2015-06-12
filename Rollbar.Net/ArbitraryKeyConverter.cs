@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,11 +9,11 @@ namespace Rollbar {
         }
 
         public override HasArbitraryKeys ReadJson(JsonReader reader, HasArbitraryKeys existingValue, JsonSerializer serializer) {
-            IDictionary<string, JToken> obj = JObject.Load(reader);
+            throw new InvalidOperationException("This library is currently not configured to fetch data from Rollbar");
+        }
 
-            existingValue.Extend(obj.ToDictionary(x => x.Key, x => x.Value as object));
-
-            return existingValue;
+        public override bool CanRead {
+            get { return false; }
         }
     }
 }
