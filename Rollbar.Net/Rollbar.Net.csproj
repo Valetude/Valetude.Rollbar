@@ -46,7 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RollbarBody.cs" />
     <Compile Include="RollbarClient.cs" />
-    <Compile Include="RollbarContext.cs" />
+    <Compile Include="RollbarCodeContext.cs" />
     <Compile Include="RollbarData.cs" />
     <Compile Include="RollbarException.cs" />
     <Compile Include="RollbarFrame.cs" />

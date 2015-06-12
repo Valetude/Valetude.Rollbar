@@ -74,7 +74,7 @@ namespace Rollbar {
         public string Code { get; set; }
 
         [JsonProperty("context", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public RollbarContext Context { get; set; }
+        public RollbarCodeContext Context { get; set; }
 
         [JsonProperty("args", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string[] Args { get; set; }
