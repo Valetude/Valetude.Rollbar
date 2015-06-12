@@ -1,16 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Rollbar {
     [JsonConverter(typeof (ArbitraryKeyConverter))]
     public class RollbarServer : HasArbitraryKeys {
-        public RollbarServer() : base(null) {
-        }
-
-        public RollbarServer(Dictionary<string, object> keys) : base(keys) {
-        }
-
         public string Host { get; set; }
 
         public string Root { get; set; }
@@ -19,7 +12,7 @@ namespace Rollbar {
 
         public string CodeVersion { get; set; }
 
-        public override void Normalize() {
+        protected override void Normalize() {
             Host = (string) (AdditionalKeys.ContainsKey("host") ? AdditionalKeys["host"] : null);
             AdditionalKeys.Remove("host");
             Root = (string) (AdditionalKeys.ContainsKey("root") ? AdditionalKeys["root"] : null);
@@ -30,8 +23,7 @@ namespace Rollbar {
             AdditionalKeys.Remove("code_version");
         }
 
-        public override Dictionary<string, object> Denormalize() {
-            var dict = AdditionalKeys.ToDictionary(k => k.Key, v => v.Value);
+        protected override Dictionary<string, object> Denormalize(Dictionary<string, object> dict) {
             if (Host != null) {
                 dict["host"] = Host;
             }

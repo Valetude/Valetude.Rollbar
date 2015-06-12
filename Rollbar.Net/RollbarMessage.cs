@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Rollbar {
     [JsonConverter(typeof (ArbitraryKeyConverter))]
     public class RollbarMessage : HasArbitraryKeys {
-        public RollbarMessage(string body) : this(body, null) {
-        }
-
-        public RollbarMessage(string body, Dictionary<string, object> keys) : base(keys) {
+        public RollbarMessage(string body) {
             if (string.IsNullOrWhiteSpace(body)) {
                 throw new ArgumentNullException("body");
             }
@@ -18,13 +14,12 @@ namespace Rollbar {
 
         public string Body { get; private set; }
 
-        public override void Normalize() {
+        protected override void Normalize() {
             Body = (string) (AdditionalKeys.ContainsKey("body") ? AdditionalKeys["body"] : null);
             AdditionalKeys.Remove("body");
         }
 
-        public override Dictionary<string, object> Denormalize() {
-            var dict = AdditionalKeys.ToDictionary(k => k.Key, v => v.Value);
+        protected override Dictionary<string, object> Denormalize(Dictionary<string, object> dict) {
             dict["body"] = Body;
             return dict;
         }

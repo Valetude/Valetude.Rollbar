@@ -4,12 +4,6 @@ using Newtonsoft.Json;
 namespace Rollbar {
     [JsonConverter(typeof (ArbitraryKeyConverter))]
     public class RollbarRequest : HasArbitraryKeys {
-        public RollbarRequest() : base(null) {
-        }
-
-        public RollbarRequest(Dictionary<string, object> additionalKeys) : base(additionalKeys) {
-        }
-
         public string Url { get; set; }
 
         public string Method { get; set; }
@@ -28,7 +22,7 @@ namespace Rollbar {
 
         public string UserIp { get; set; }
 
-        public override void Normalize() {
+        protected override void Normalize() {
             Url = (string) (AdditionalKeys.ContainsKey("url") ? AdditionalKeys["url"] : null);
             AdditionalKeys.Remove("url");
             Method = (string) (AdditionalKeys.ContainsKey("method") ? AdditionalKeys["method"] : null);
@@ -49,8 +43,7 @@ namespace Rollbar {
             AdditionalKeys.Remove("user_ip");
         }
 
-        public override Dictionary<string, object> Denormalize() {
-            var dict = new Dictionary<string, object>();
+        protected override Dictionary<string, object> Denormalize(Dictionary<string, object> dict) {
             if (Url != null) {
                 dict["url"] = Url;
             }

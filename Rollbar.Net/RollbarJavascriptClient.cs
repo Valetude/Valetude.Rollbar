@@ -4,12 +4,6 @@ using Newtonsoft.Json;
 namespace Rollbar {
     [JsonConverter(typeof (ArbitraryKeyConverter))]
     public class RollbarJavascriptClient : HasArbitraryKeys {
-        public RollbarJavascriptClient() : base(null) {
-        }
-
-        public RollbarJavascriptClient(Dictionary<string, object> additionalKeys) : base(additionalKeys) {
-        }
-
         public string Browser { get; set; }
 
         public string CodeVersion { get; set; }
@@ -18,7 +12,7 @@ namespace Rollbar {
 
         public string GuessUncaughtFrames { get; set; }
 
-        public override void Normalize() {
+        protected override void Normalize() {
             Browser = (string) (AdditionalKeys.ContainsKey("browser") ? AdditionalKeys["browser"] : null);
             AdditionalKeys.Remove("browser");
             CodeVersion = (string) (AdditionalKeys.ContainsKey("code_version") ? AdditionalKeys["code_version"] : null);
@@ -29,8 +23,7 @@ namespace Rollbar {
             AdditionalKeys.Remove("guess_uncaught_frames");
         }
 
-        public override Dictionary<string, object> Denormalize() {
-            var dict = new Dictionary<string, object>();
+        protected override Dictionary<string, object> Denormalize(Dictionary<string, object> dict) {
             if (Browser != null) {
                 dict["browser"] = Browser;
             }

@@ -12,8 +12,7 @@ namespace Rollbar {
         public override HasArbitraryKeys ReadJson(JsonReader reader, HasArbitraryKeys existingValue, JsonSerializer serializer) {
             IDictionary<string, JToken> obj = JObject.Load(reader);
 
-            existingValue.WithKeys(obj.ToDictionary(x => x.Key, x => x.Value as object));
-            existingValue.Normalize();
+            existingValue.Extend(obj.ToDictionary(x => x.Key, x => x.Value as object));
 
             return existingValue;
         }

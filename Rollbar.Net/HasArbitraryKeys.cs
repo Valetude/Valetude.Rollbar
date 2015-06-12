@@ -1,20 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Rollbar {
     public abstract class HasArbitraryKeys : IEnumerable<KeyValuePair<string, object>> {
-        protected HasArbitraryKeys(Dictionary<string, object> additionalKeys) {
-            AdditionalKeys = additionalKeys ?? new Dictionary<string, object>();
+        protected HasArbitraryKeys() {
+            AdditionalKeys = new Dictionary<string, object>();
         }
 
-        public abstract void Normalize();
+        /// <summary>
+        /// Note: this is ugly state altering madness :(.
+        /// On the other hand it's pretty formal: this method should look for 
+        /// 'Rollbar Knows about this' keys, and update the actual C# value with
+        /// the value in the dict, then delete the key from the AdditionalKeys. 
+        /// Any time you add a key this will be called.
+        /// </summary>
+        protected abstract void Normalize();
 
-        public abstract Dictionary<string, object> Denormalize();
+        /// <summary>
+        /// Given a dictionary, add any keys that are stored on the C# object instead of the
+        /// dictionary.
+        /// </summary>
+        /// <param name="dict">guaranteed to be a copy of the Additional Keys</param>
+        /// <returns>the input `dict` with additional keys</returns>
+        protected abstract Dictionary<string, object> Denormalize(Dictionary<string, object> dict);
 
-        public Dictionary<string, object> AdditionalKeys { get; private set; }
+        protected Dictionary<string, object> AdditionalKeys { get; private set; }
+
+        public Dictionary<string, object> Denormalize() {
+            var dictionary = AdditionalKeys.ToDictionary(k => k.Key, k => k.Value);
+            return Denormalize(dictionary);
+        }
 
         public void Add(string key, object value) {
             AdditionalKeys.Add(key, value);
+            Normalize();
+        }
+
+        public void Extend(Dictionary<string, object> extraKeys) {
+            foreach (var kvp in extraKeys) {
+                AdditionalKeys[kvp.Key] = kvp.Value;
+            }
             Normalize();
         }
 
@@ -29,15 +55,6 @@ namespace Rollbar {
 
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
-        }
-    }
-
-    public static class HasArbitraryKeysExtension {
-        public static T WithKeys<T>(this T has, Dictionary<string, object> otherKeys) where T : HasArbitraryKeys {
-            foreach (var kvp in otherKeys) {
-                has.AdditionalKeys.Add(kvp.Key, kvp.Value);
-            }
-            return has;
         }
     }
 }
