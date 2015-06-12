@@ -70,6 +70,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="RollbarClientFixture.cs" />
+    <Compile Include="RollbarCodeContextFixture.cs" />
     <Compile Include="RollbarDataFixture.cs" />
     <Compile Include="RollbarJavascriptClientFixture.cs" />
     <Compile Include="RollbarMessageFixture.cs" />
