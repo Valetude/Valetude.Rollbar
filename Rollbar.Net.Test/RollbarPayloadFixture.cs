@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FakeItEasy;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
@@ -184,6 +185,20 @@ namespace Rollbar.Test {
             Assert.False(keys.Contains("fingerprint"), "fingerprint should not be present");
             Assert.False(keys.Contains("title"), "title should not be present");
             Assert.False(keys.Contains("uuid"), "uuid should not be present");
+        }
+
+        [Fact]
+        public void RollbarPayload_cannot_have_null_access_token() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var x = new RollbarPayload(null, A<RollbarData>.Ignored);
+            });
+        }
+
+        [Fact]
+        public void RollbarPayload_cannot_have_null_data() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var x = new RollbarPayload("test", null);
+            });
         }
     }
 }
