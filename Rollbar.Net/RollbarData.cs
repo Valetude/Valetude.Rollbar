@@ -74,9 +74,9 @@ namespace Rollbar {
         public string Uuid { get; set; }
 
         [JsonIgnore]
-        public Guid GuidUuid {
-            get { return Guid.Parse(Uuid); }
-            set { Uuid = value.ToString("N"); }
+        public Guid? GuidUuid {
+            get { return Uuid == null ? (Guid?) null : Guid.Parse(Uuid); }
+            set { Uuid = value == null ? null : value.Value.ToString("N"); }
         }
 
         [JsonProperty("notifier", DefaultValueHandling = DefaultValueHandling.Ignore)]
