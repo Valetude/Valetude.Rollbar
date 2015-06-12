@@ -8,18 +8,18 @@ namespace Rollbar {
 
         public string CodeVersion { get; set; }
 
-        public string SourceMapEnabled { get; set; }
+        public bool? SourceMapEnabled { get; set; }
 
-        public string GuessUncaughtFrames { get; set; }
+        public bool? GuessUncaughtFrames { get; set; }
 
         protected override void Normalize() {
             Browser = (string) (AdditionalKeys.ContainsKey("browser") ? AdditionalKeys["browser"] : null);
             AdditionalKeys.Remove("browser");
             CodeVersion = (string) (AdditionalKeys.ContainsKey("code_version") ? AdditionalKeys["code_version"] : null);
             AdditionalKeys.Remove("code_version");
-            SourceMapEnabled = (string) (AdditionalKeys.ContainsKey("source_map_enabled") ? AdditionalKeys["source_map_enabled"] : null);
+            SourceMapEnabled = (bool) (AdditionalKeys.ContainsKey("source_map_enabled") ? AdditionalKeys["source_map_enabled"] : null);
             AdditionalKeys.Remove("source_map_enabled");
-            GuessUncaughtFrames = (string) (AdditionalKeys.ContainsKey("guess_uncaught_frames") ? AdditionalKeys["guess_uncaught_frames"] : null);
+            GuessUncaughtFrames = (bool) (AdditionalKeys.ContainsKey("guess_uncaught_frames") ? AdditionalKeys["guess_uncaught_frames"] : null);
             AdditionalKeys.Remove("guess_uncaught_frames");
         }
 
