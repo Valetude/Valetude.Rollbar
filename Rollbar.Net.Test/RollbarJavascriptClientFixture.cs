@@ -54,6 +54,5 @@ namespace Rollbar.Test {
             var jObject = JObject.Parse(json);
             Assert.Equal(guessUncaughtFrames, jObject["guess_uncaught_frames"]);
         }
-
     }
 }
