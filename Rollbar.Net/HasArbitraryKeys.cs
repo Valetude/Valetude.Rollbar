@@ -33,7 +33,7 @@ namespace Rollbar {
         }
 
         public void Add(string key, object value) {
-            AdditionalKeys.Add(key, value);
+            AdditionalKeys[key] = value;
             Normalize();
         }
 
