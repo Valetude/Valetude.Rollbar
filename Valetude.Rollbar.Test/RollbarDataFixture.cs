@@ -6,6 +6,7 @@ using System.Threading;
 using FakeItEasy;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Valetude.Rollbar;
 using Xunit;
 
 namespace Rollbar.Test {

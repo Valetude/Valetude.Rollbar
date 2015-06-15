@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarTrace {
         public RollbarTrace(RollbarFrame[] frames, RollbarException exception) {
             if (frames == null) {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Valetude.Rollbar;
 using Xunit;
 
 namespace Rollbar.Test {

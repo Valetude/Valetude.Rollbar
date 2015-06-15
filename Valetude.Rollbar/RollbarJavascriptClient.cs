@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     [JsonConverter(typeof (ArbitraryKeyConverter))]
     public class RollbarJavascriptClient : HasArbitraryKeys {
         public string Browser { get; set; }

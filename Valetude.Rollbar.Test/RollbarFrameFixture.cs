@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Valetude.Rollbar;
 using Xunit;
 
 namespace Rollbar.Test {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class ArbitraryKeyConverter : JsonConverter<HasArbitraryKeys> {
         public override void WriteJson(JsonWriter writer, HasArbitraryKeys value, JsonSerializer serializer) {
             JObject.FromObject(value.Denormalize(), serializer).WriteTo(writer);

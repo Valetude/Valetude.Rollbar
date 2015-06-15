@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarFrame {
         public RollbarFrame(string filename) {
             FileName = filename;

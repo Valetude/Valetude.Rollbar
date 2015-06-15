@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarPayload {
         public RollbarPayload(string accessToken, RollbarData data) {
             if (string.IsNullOrWhiteSpace(accessToken)) {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarBody {
         public RollbarBody(IEnumerable<Exception> exceptions) {
             if (exceptions == null) {

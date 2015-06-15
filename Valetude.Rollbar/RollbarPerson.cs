@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarPerson {
         public RollbarPerson(string id) {
             Id = id;

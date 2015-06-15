@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     [JsonConverter(typeof (ErrorLevelConverter))]
     public enum ErrorLevel {
         Critical,

@@ -2,6 +2,7 @@
 using System.Runtime.Remoting.Contexts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Valetude.Rollbar;
 using Xunit;
 
 namespace Rollbar.Test {

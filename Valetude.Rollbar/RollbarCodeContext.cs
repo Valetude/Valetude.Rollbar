@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public class RollbarCodeContext {
         [JsonProperty("pre", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string[] Pre { get; set; }

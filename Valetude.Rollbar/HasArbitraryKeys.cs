@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rollbar {
+namespace Valetude.Rollbar {
     public abstract class HasArbitraryKeys : IEnumerable<KeyValuePair<string, object>> {
         protected HasArbitraryKeys() {
             AdditionalKeys = new Dictionary<string, object>();

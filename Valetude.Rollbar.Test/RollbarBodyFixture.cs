@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Valetude.Rollbar;
 using Xunit;
 
 namespace Rollbar.Test {
