@@ -60,6 +60,7 @@ namespace Rollbar.Test {
         }
 
         [Fact(Skip="Changes global state, breaks other fixtures. Run this by itself. In any case, it works.")]
+        //[Fact]
         public void Platform_default_can_be_overriden() {
             var defaultPlatform = RollbarData.DefaultPlatform;
             try {
@@ -73,6 +74,7 @@ namespace Rollbar.Test {
         }
 
         [Fact(Skip = "Changes global state, breaks other fixtures. Run this by itself. In any case, it works.")]
+        //[Fact]
         public void Language_default_can_be_overriden() {
             var defaultLanguage = RollbarData.DefaultLanguage;
             try {
