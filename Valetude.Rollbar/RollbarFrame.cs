@@ -32,6 +32,25 @@ namespace Rollbar {
         [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Method { get; set; }
 
+        #region Unautomatable
+        //These properties cannot be automated w/ normal C# StackFrames.
+        // You may be able to fill this out from another .NET language.
+        // They're there in case you're awesome.
+
+        [JsonProperty("code", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Code { get; set; }
+
+        [JsonProperty("context", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public RollbarCodeContext Context { get; set; }
+
+        [JsonProperty("args", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string[] Args { get; set; }
+
+        [JsonProperty("kwargs", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public Dictionary<string, object> Kwargs { get; set; }
+
+        #endregion
+
         private static string GetFileName(StackFrame frame, MethodBase method) {
             var returnVal = frame.GetFileName();
             if (!string.IsNullOrWhiteSpace(returnVal)) {
@@ -67,24 +86,5 @@ namespace Rollbar {
             }
             return string.Format("{0}()", methodName);
         }
-
-        #region Unautomatable
-        //These properties cannot be automated w/ normal C# StackFrames.
-        // You may be able to fill this out from another .NET language.
-        // They're there in case you're awesome.
-
-        [JsonProperty("code", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Code { get; set; }
-
-        [JsonProperty("context", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public RollbarCodeContext Context { get; set; }
-
-        [JsonProperty("args", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string[] Args { get; set; }
-
-        [JsonProperty("kwargs", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public Dictionary<string, object> Kwargs { get; set; }
-
-        #endregion
     }
 }
