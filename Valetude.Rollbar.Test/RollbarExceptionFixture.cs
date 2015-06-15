@@ -5,6 +5,13 @@ using Xunit;
 namespace Rollbar.Test {
     public class RollbarExceptionFixture {
         [Fact]
+        public void Exception_cant_be_null() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rollbarException = new RollbarException((Exception) null);
+            });
+        }
+
+        [Fact]
         public void Exception_from_exception_has_class() {
             var rollbarException = new RollbarException(GetException());
             Assert.Equal("System.NotFiniteNumberException", rollbarException.Class);

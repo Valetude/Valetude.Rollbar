@@ -7,6 +7,48 @@ using Xunit;
 namespace Rollbar.Test {
     public class RollbarBodyFixture {
         [Fact]
+        public void Exceptions_cannot_be_null() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rb = new RollbarBody((IEnumerable<Exception>) null);
+            });
+        }
+
+        [Fact]
+        public void Exceptions_cannot_be_empty() {
+            Assert.Throws<ArgumentException>(() => {
+                var rb = new RollbarBody(new Exception[0]);
+            });
+        }
+
+        [Fact]
+        public void Exception_cannot_be_null() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rb = new RollbarBody((Exception) null);
+            });
+        }
+
+        [Fact]
+        public void Message_cannot_be_null() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rb = new RollbarBody((RollbarMessage) null);
+            });
+        }
+
+        [Fact]
+        public void Crash_report_cannot_be_null() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rb = new RollbarBody((string) null);
+            });
+        }
+
+        [Fact]
+        public void Crash_report_cannot_be_whitespace() {
+            Assert.Throws<ArgumentNullException>(() => {
+                var rb = new RollbarBody("    \t\n");
+            });
+        }
+
+        [Fact]
         public void Crash_report_works_correctly() {
             var rollbarBody = new RollbarBody("Crash happened");
             var json = JsonConvert.SerializeObject(rollbarBody);
