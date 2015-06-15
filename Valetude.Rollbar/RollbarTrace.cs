@@ -22,7 +22,7 @@ namespace Rollbar {
             }
 
             var frames = new StackTrace(exception, true).GetFrames() ?? new StackFrame[0];
-            
+
             Frames = frames.Select(frame => new RollbarFrame(frame)).ToArray();
             Exception = new RollbarException(exception);
         }

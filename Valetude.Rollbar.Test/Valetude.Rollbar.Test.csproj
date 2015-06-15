@@ -81,6 +81,7 @@
     <Compile Include="RollbarPersonFixture.cs" />
     <Compile Include="RollbarRequestFixture.cs" />
     <Compile Include="RollbarServerFixture.cs" />
+    <Compile Include="RollbarTraceFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
