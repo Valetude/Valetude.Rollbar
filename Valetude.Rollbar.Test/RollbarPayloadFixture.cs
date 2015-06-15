@@ -14,24 +14,37 @@ namespace Rollbar.Test {
         private readonly RollbarPayload _aggregateExample;
 
         public RollbarPayloadFixture() {
-            try {
-                ThrowAnException();
-            }
-            catch (Exception e) {
-                this._exceptionExample = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody(e)));
-            }
+            this._exceptionExample = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody(GetException())));
             this._messageException = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody(new RollbarMessage("A message I wish to send to the rollbar overlords"))));
             this._crashException = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody("A terrible crash!")));
+            this._aggregateExample = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody(GetAggregateException())));
+        }
+
+        // The following three methods make it easier to test the RollbarFrame becuase the fix the location
+        // of the error to an easy to type ("ThrowAnException") and constant location.
+        // Figuring out how to write .ctor_bFunc_Method0143 was kind of a bummer. So I didn't.
+        private static void ThrowAnException() {
+            throw new Exception("Test");
+        }
+
+        private static Exception GetException() {
+            try {
+                ThrowAnException();
+                throw new Exception("Unreachable");
+            }
+            catch (Exception e) {
+                return e;
+            }
+        }
+
+        private static AggregateException GetAggregateException() {
             try {
                 Parallel.ForEach(new[] {1, 2}, i => ThrowAnException());
             }
             catch (AggregateException e) {
-                this._aggregateExample = new RollbarPayload("access-token", new RollbarData("test", new RollbarBody(e)));
+                return e;
             }
-        }
-
-        private static void ThrowAnException() {
-            throw new Exception("Test");
+            throw new Exception("Unreachable");
         }
 
         [Fact]
@@ -49,7 +62,7 @@ namespace Rollbar.Test {
 
             var frames = Assert.IsType<JArray>(trace["frames"]);
             Assert.All(frames, token => Assert.NotNull(token["filename"]));
-            Assert.Equal("ThrowAnException", frames[0]["method"].Value<string>());
+            Assert.Equal("Rollbar.Test.RollbarPayloadFixture.ThrowAnException()", frames[0]["method"].Value<string>());
             var exception = Assert.IsType<JObject>(trace["exception"]);
             Assert.Equal("Test", exception["message"].Value<string>());
             Assert.Equal("System.Exception", exception["class"].Value<string>());
@@ -126,7 +139,7 @@ namespace Rollbar.Test {
             Assert.All(traceChain, trace => {
                 var frames = Assert.IsType<JArray>(trace["frames"]);
                 Assert.All(frames, frame => Assert.NotNull(frame["filename"]));
-                Assert.Equal("ThrowAnException", frames[0]["method"].Value<string>());
+                Assert.Equal("Rollbar.Test.RollbarPayloadFixture.ThrowAnException()", frames[0]["method"].Value<string>());
                 var exception = Assert.IsType<JObject>(trace["exception"]);
                 Assert.Equal("Test", exception["message"].Value<string>());
                 Assert.Equal("System.Exception", exception["class"].Value<string>());

@@ -57,12 +57,15 @@ namespace Rollbar {
 
         private static string GetMethod(MethodBase method) {
             var methodName = method.Name;
+            if (method.ReflectedType != null) {
+                methodName = string.Format("{0}.{1}", method.ReflectedType.FullName, methodName);
+            }
             var parameters = method.GetParameters();
 
             if (parameters.Length > 0) {
                 return string.Format("{0}({1})", methodName, string.Join(", ", parameters.Select(p => string.Format("{0} {1}", p.ParameterType, p.Name))));
             }
-            return methodName;
+            return string.Format("{0}()", methodName);
         }
 
         #region Unautomatable
