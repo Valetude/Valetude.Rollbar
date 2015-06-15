@@ -18,7 +18,10 @@ namespace Rollbar {
         [JsonProperty("class", Required = Required.Always)]
         public string Class { get; private set; }
 
-        [JsonProperty("message")]
+        [JsonProperty("message", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Message { get; set; }
+
+        [JsonProperty("description", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Description { get; set; }
     }
 }

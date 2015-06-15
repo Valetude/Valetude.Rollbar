@@ -72,6 +72,7 @@
     <Compile Include="RollbarClientFixture.cs" />
     <Compile Include="RollbarCodeContextFixture.cs" />
     <Compile Include="RollbarDataFixture.cs" />
+    <Compile Include="RollbarExceptionFixture.cs" />
     <Compile Include="RollbarJavascriptClientFixture.cs" />
     <Compile Include="RollbarMessageFixture.cs" />
     <Compile Include="RollbarPayloadFixture.cs" />
