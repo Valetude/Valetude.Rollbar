@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Rollbar")]
 [assembly: AssemblyDescription("C# Rollbar Payload, post it whenever and however it makes sense")]
 [assembly: AssemblyCompany("Valetude LLC")]
-[assembly: AssemblyProduct("Rollbar.Net")]
+[assembly: AssemblyProduct("Valetude.Rollbar")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 #endregion
 

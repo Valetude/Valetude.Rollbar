@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rollbar.Net", "Rollbar.Net.csproj", "{3A99C5E2-AE41-49CA-9CB3-2C3A70D2A8C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetude.Rollbar", "Valetude.Rollbar\Valetude.Rollbar.csproj", "{3A99C5E2-AE41-49CA-9CB3-2C3A70D2A8C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rollbar.Net.Test", "..\Rollbar.Net.Test\Rollbar.Net.Test.csproj", "{91F86F46-079A-40A5-BC2C-D34D3119515A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetude.Rollbar.Test", "Valetude.Rollbar.Test\Valetude.Rollbar.Test.csproj", "{91F86F46-079A-40A5-BC2C-D34D3119515A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
