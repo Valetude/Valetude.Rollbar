@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Rollbar.Test {
@@ -31,6 +34,65 @@ namespace Rollbar.Test {
             Assert.Matches("\"lineno\":\\d+", json);
             Assert.Matches("\"colno\":\\d+", json);
             Assert.Contains("\"method\":\"Rollbar.Test.RollbarFrameFixture.GetFrame()\"", json);
+        }
+
+        [Fact]
+        public void Frame_can_have_code() {
+            var frame = new RollbarFrame("ThisFile.cs") {
+                Code = "        CallThisMethod(arg1, myObject2);",
+            };
+            Assert.Contains("\"code\":\"        CallThisMethod(arg1, myObject2);\"", JsonConvert.SerializeObject(frame));
+        }
+
+        [Fact]
+        public void Frame_can_have_context() {
+            var frame = new RollbarFrame("ThisFile.cs") {
+                Code = "        CallThisMethod(arg1, myObject2);",
+                Context = new RollbarCodeContext {
+                    Pre = new [] {
+                        "        var arg1 = new Whatever();",
+                        "        var myObject2 = new Whatever();",
+                    },
+                    Post = new [] {
+                        "        Console.WriteLine(\"Whatever\", arg1);",
+                        "    }",
+                    },
+                }
+            };
+            var json = JsonConvert.SerializeObject(frame);
+            Assert.Contains("\"code\":\"        CallThisMethod(arg1, myObject2);\"", json);
+            Assert.Contains("\"context\":{", json);
+            Assert.Contains("\"pre\":[", json);
+            Assert.Contains("\"post\":[", json);
+        }
+
+        [Fact]
+        public void Frame_can_have_args() {
+            var frame = new RollbarFrame("ThisFile.cs") {
+                Args = new[] {
+                    "1", "\"Test\"", "1.5",
+                },
+            };
+            var json = JsonConvert.SerializeObject(frame);
+            Assert.Contains("\"args\":[\"1\",\"\\\"Test\\\"\",\"1.5\"]", json);
+            JObject obj = JObject.Parse(json);
+            Assert.Equal(obj["args"].Value<JArray>().Select(x => x.Value<string>()), frame.Args);
+        }
+
+        [Fact]
+        public void Frame_can_have_kwargs() {
+            var frame = new RollbarFrame("ThisFile.cs") {
+                Kwargs = new Dictionary<string, object> {
+                    {"One", 1},
+                    {"String", "Hi There"},
+                    {"Arr", new object[0] },
+                },
+            };
+            var json = JsonConvert.SerializeObject(frame);
+            Assert.Contains("\"kwargs\":{", json);
+            Assert.Contains("\"One\":1", json);
+            Assert.Contains("\"String\":\"Hi There\"", json);
+            Assert.Contains("\"Arr\":[]", json);
         }
 
         private static StackFrame GetFrame() {
