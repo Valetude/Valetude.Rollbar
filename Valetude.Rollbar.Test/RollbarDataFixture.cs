@@ -80,7 +80,7 @@ namespace Rollbar.Test {
             try {
                 RollbarData.DefaultLanguage = "f#";
                 var data = new RollbarData("whatever", A.Fake<RollbarBody>());
-                Assert.Equal("f#", data.Platform);
+                Assert.Equal("f#", data.Language);
             }
             finally {
                 RollbarData.DefaultLanguage = defaultLanguage;
