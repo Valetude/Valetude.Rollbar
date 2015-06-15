@@ -54,5 +54,16 @@ namespace Rollbar.Test {
             var jObject = JObject.Parse(json);
             Assert.Equal(guessUncaughtFrames, jObject["guess_uncaught_frames"]);
         }
+
+        [Fact]
+        public void JsClient_can_have_arbitrary_keys() {
+            const string browser = "chromex64";
+            _rollbarJsClient.Browser = browser;
+            _rollbarJsClient["whatever"] = "test";
+            var json = JsonConvert.SerializeObject(_rollbarJsClient);
+            var jObject = JObject.Parse(json);
+            Assert.Equal(browser, jObject["browser"]);
+            Assert.Equal("test", jObject["whatever"]);
+        }
     }
 }
