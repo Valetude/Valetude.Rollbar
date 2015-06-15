@@ -69,6 +69,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="RollbarBodyFixture.cs" />
     <Compile Include="RollbarClientFixture.cs" />
     <Compile Include="RollbarCodeContextFixture.cs" />
     <Compile Include="RollbarDataFixture.cs" />
