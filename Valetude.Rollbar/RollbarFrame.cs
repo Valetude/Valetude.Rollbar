@@ -23,6 +23,15 @@ namespace Rollbar {
         [JsonProperty("filename", Required = Required.Always)]
         public string FileName { get; private set; }
 
+        [JsonProperty("lineno", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int? LineNo { get; set; }
+
+        [JsonProperty("colno", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int? ColNo { get; set; }
+
+        [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string Method { get; set; }
+
         private static string GetFileName(StackFrame frame, MethodBase method) {
             var returnVal = frame.GetFileName();
             if (!string.IsNullOrWhiteSpace(returnVal)) {
@@ -30,9 +39,6 @@ namespace Rollbar {
             }
             return method.ReflectedType != null ? method.ReflectedType.FullName : "(unknown)";
         }
-
-        [JsonProperty("lineno", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int? LineNo { get; set; }
 
         private static int? GetLineNumber(StackFrame frame) {
             var lineNo = frame.GetFileLineNumber();
@@ -45,15 +51,9 @@ namespace Rollbar {
             return lineNo == -1 ? (int?)null : lineNo;
         }
 
-        [JsonProperty("colno", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int? ColNo { get; set; }
-
         private static int? GetFileColumnNumber(StackFrame frame) {
             return frame.GetFileColumnNumber();
         }
-
-        [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Method { get; set; }
 
         private static string GetMethod(MethodBase method) {
             var methodName = method.Name;
